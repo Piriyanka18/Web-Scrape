@@ -1,0 +1,14 @@
+from bs4 import BeautifulSoup
+import requests
+
+# website
+url ="https://www.newegg.ca/asrock-radeon-rx-6600-rx6600-cld-8g/p/N82E16814930066"
+
+result = requests.get(url)
+doc = BeautifulSoup(result.text,"html.parser")
+#print(doc.prettify())
+
+prices= doc.find_all(text="$")
+parent = prices[0].parent
+strong = parent.find("strong")
+print(strong.string)

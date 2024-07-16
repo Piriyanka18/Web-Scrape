@@ -1,0 +1,27 @@
+from bs4 import BeautifulSoup
+import requests
+import re
+
+
+with open("index_1.html","r") as f:
+  doc = BeautifulSoup(f,"html.parser")
+
+#tags = doc.find_all("option").text=("Short courses")
+
+# tags  = doc.find_all(class_="btn-item")
+
+# for tag in tags:
+#     print(tag.string)
+
+# tags = doc.find_all(string=re.compile("\$.*"),limit=1)
+# for tag in tags:
+#   print(tag.strip())
+
+#### modify the html file####
+tags = doc.find_all("input",type="text")
+for tag in tags:
+  tag["placeholder"]="I changed you!"
+
+with open("changed.html","w") as file:
+  file.write(str(doc))
+  
